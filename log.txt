@@ -15,3 +15,4 @@ jls2: adicinou um novo elemento
 jls2: fez logout
 souza: realizou uma pesquisa
 souza: fez logout
+admcadastrou um tripulante9/6/201817:32:23admcadastrou um tripulante9/6/201817:33:47admvisualizou todos os elementos9/6/201817:35:26admFez ordenaçao de tripulante pelo cpf9/6/201817:35:56admfez uma pesquisa9/6/201817:36:16admFez uma pesquisa dos tripulantes pelo cargo9/6/201817:36:28admFez impressao de tripulante pelo cpf9/6/201817:36:55admcadastrou um tripulante9/6/201817:37:52admcadastrou um tripulante9/6/201817:38:42admvisualizou todos os elementos9/6/201817:39:55admFez atualizaçao de tripulante9/6/201817:40:19admvisualizou todos os elementos9/6/201817:42:0admfez uma pesquisa9/6/201817:42:41

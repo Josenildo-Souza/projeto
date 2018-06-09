@@ -5,6 +5,7 @@ Created on Mon May 14 15:25:59 2018
 """
 dic_elementos = {}
 dic_usuario = {}
+dic_usuario = {'adm':('adm', '0')}
 
 def recuperar_chaves(arq):
     arquivo = open (arq, 'r')
@@ -64,6 +65,7 @@ def decifrar_usuarios(arq, dic_usuario):
         linha = arquivo.readline()
         senha = decifrar_codigo(linha, d, n)
         linha = arquivo.readline()
+        print(linha)
         acesso = int(linha[0])
         dic_usuario[chave] = (senha, acesso)
         linha = arquivo.readline()
@@ -91,8 +93,7 @@ def criptografar_elementos(dic_elementos, arq):
         arquivo.write("\n")
         arquivo.write(criptografar_string(dic_elementos[chave][6], e, n))
         arquivo.write("\n")
-        arquivo.write("---")
-        arquivo.close()
+    arquivo.close()
      
 
 def descriptografar_elementos(arq, dic_elementos):
@@ -116,13 +117,31 @@ def descriptografar_elementos(arq, dic_elementos):
         linha = arquivo.readline()
         matricula = decifrar_codigo(linha, d, n)
         dic_elementos[chave]=(nome, funcao, data_de_nascimento, data_de_embarque, porto_de_referencia, passaporte, matricula)
+        linha = arquivo.readline()
 
         if linha == "\n":
             linha = arquivo.readline()
     return dic_elementos
 
-criptografar_usuarios(dic_usuario, "usuarios.txt")
-decifrar_usuarios("Usuarios.txt", dic_usuario)
-criptografar_elementos(dic_elementos, "elementos.txt")
-descriptografar_elementos("elementos.txt", dic_elementos)
 
+
+
+'''
+teste = {}
+teste["123"]=("maria", "cmt", "23/12/1980", "01/05/2018","Cabo Verde", "fg123645", "123456")
+teste["24"] = ("adriano", "1on", "24/04/1990"," 21/01/2017", "itajai", "fg34567", "987654")
+criptografar_elementos(teste, 'testando1.txt')
+resultado = {}
+descriptografar_elementos('testando1.txt', resultado)
+
+teste = {}
+teste["adm"]=("adm", "0")
+criptografar_usuarios(teste, 'testando.txt')
+resultado = {}
+decifrar_usuarios('testando.txt', resultado)
+
+descriptografar_elementos("elementos.txt", dic_elementos)
+criptografar_usuarios(dic_usuario, "usuarios.txt")
+criptografar_elementos(dic_elementos, "elementos.txt")
+decifrar_usuarios("Usuarios.txt", dic_usuario)
+'''

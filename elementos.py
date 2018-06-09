@@ -11,7 +11,7 @@ dic_elementos = {}
 
 
 def cadastrar_elementos(dic_elementos):
-    cpf = input("Digite o cpf do tripulante: ")
+    cpf = input("Digite o CPF do Tripulante: ")
     if cpf in dic_elementos:
             print("Esse CPF ja esta Cadastrado!")
 
@@ -25,7 +25,6 @@ def cadastrar_elementos(dic_elementos):
         matricula = input("Digite o nº da matricula: ")
         print("Tripulante Cadastrado com Sucesso!")
         dic_elementos[cpf]=(nome, funcao, data_de_nascimento, data_de_embarque, porto_de_referencia, passaporte, matricula)
-
 
 
 def buscar_elementos(dic_elementos):
@@ -44,51 +43,65 @@ def buscar_elementos(dic_elementos):
                 continua = False
         else:
             print("Tripulante nao encontrado em nosso banco de dados!")
+            escolha1 = input("Deseja buscar outro Tripulante? s/n ")
+            if escolha1 == "s":
+                continua = True
+            else:
+                continua = False
+
+
+'''
+def buscar_elementos(dic_elementos):
+    continua = True
+    while continua == True:
+        elemento_buscado = input("Digite o CPF do tripulante: ")
+        
+        if elemento_buscado in dic_elementos:
+#            return dic_elementos[elemento_buscado]
+            print(dic_elementos[elemento_buscado])
+        else:
+            print("Tripulante nao encontrado em nosso banco de dados!")
             entrada = input("Deseja buscar outro Tripulante? s/n ")
             if entrada == "s":
                 continua = True
             else:
                 continua = False
+
 '''
 def buscar_cargo(dic_elementos):
     continua = True
     while continua == True:
         resultados = []
         cargo_buscado = input("Digite o cargo do tripulante: ")
+        continua = False
         for cpf in dic_elementos:
             if dic_elementos[cpf][1] == cargo_buscado:
-                resultados.append(cpf)
-        return resultados
-'''
-
-def buscar_cargo(dic_elementos):
-#    continua = True
-#    while continua == True:
-    resultados = []
-    cargo_buscado = input("Digite o cargo do tripulante: ")
+                resultados.append(dic_elementos[cpf])
+        if len(resultados)== 0:
+            print("Nenhum Tripulante com esse cargo")
+            entrada = input("Deseja buscar outro Tripulante? s/n ")
+            if entrada == "s":
+                continua = True
+            else:
+                continua = False
+            
     
-    for cpf in dic_elementos:
-        if dic_elementos[cpf][1] == cargo_buscado:
-            resultados.append(dic_elementos[cpf])
-    if len(resultados)== 0:
-        print("Nenhum tripulante com esse cargo")
-
-    else:
-        for i in resultados:
-            print(i)                
+        else:
+            for i in resultados:
+                print(i)                
         
 
 def remover_elementos(dic_elementos):
     continua = True
     while continua == True:
-        cpf = input("Digite o cpf que deseja para remover o tripulante: ")
+        cpf = input("Digite o cpf que deseja para remover o Tripulante: ")
         if cpf in dic_elementos:
             dic_elementos.pop(cpf)
-            print("Elemento Removido com Sucesso!")
+            print("Tripulante Removido com Sucesso!")
             continua = False
     
         else:
-            entrada=input("Usuario nao encontrado, deseja buscar outro?(s/n) ")
+            entrada=input("Tripulante nao encontrado, deseja buscar outro?(s/n) ")
             if entrada=="s":
                 continua=True
             elif entrada=="n":
@@ -98,14 +111,14 @@ def remover_elementos(dic_elementos):
 def atualizar_elementos(dic_elementos):
     continua = True
     while continua == True:
-        cpf = input("Digite o cpf do usuario que vc quer atualizar: ")
+        cpf = input("Digite o cpf do Tripulante que vc quer atualizar: ")
         if cpf in dic_elementos:
             dic_elementos.pop(cpf)
             cadastrar_elementos(dic_elementos)
             print("Tripulante Atualizado com Sucesso!")
             continua = False
         else:
-            continuar=input("Usuario nao encontrado, deseja buscar outro?(s/n) ")
+            continuar=input("Tripulante nao encontrado, deseja buscar outro?(s/n) ")
             if continuar=="s":
                 continua=True
             elif continuar=="n":
@@ -115,23 +128,29 @@ def atualizar_elementos(dic_elementos):
 def mostrar_todos_os_elementos(dic_elementos):
     
     if len(dic_elementos)==0:
-        print("O dicionario de Elementos está vazio!")
+        print("O dicionario de Tripulantes está vazio!")
     else:
         for chave in dic_elementos:
             print(dic_elementos[chave])
+            
 
-
+###########################################
 def ordenar_elementos(dic_elementos):
-    lista_ordenada = list(dic_elementos.keys())
-    lista_ordenada.sort
-    for chave in lista_ordenada:
-        print(chave, "=", dic_elementos[chave])            
+    lista = []
+    for chave in dic_elementos:
+        lista.append((chave, dic_elementos[chave]))
+    lista.sort()
+#    return lista    
+    print(lista)
 
-'''        
-def impresaao_elementos(dic_elementos):    
-    for i in dic_elementos:
-        print(dic_elementos)        
-'''        
+       
+def impressao_ordenada(dic_elementos):
+    arq = open("impressao.txt", "w")    
+    for chave in dic_elementos:
+        arq.write(chave, dic_elementos[chave])
+        arq.close()
+    print(dic_elementos)        
+        
         
         
         

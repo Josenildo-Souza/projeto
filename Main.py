@@ -6,18 +6,23 @@ Created on Mon May 14 15:25:59 2018
 """
 #ChavePublica {e,n}
 #ChavePrivada {d,n}
-#import Criptografia as cp
+import Criptografia as cp
 import Usuarios  as us
 import elementos as el
-#import data as dt
+import data as dt
 
 dic_usuario={}
 dic_elementos={}
 dic_usuario["adm"]=("adm", "0")
 usuario = ''
+try:
+    log = open('log.txt', 'a')
+except:
+    log = open('log.txt', 'w')
 
 
 def menu_nivel(nivel):
+    global usuario
     print("""NIVEIS DE USUARIO:
 -----------------
 0 - GG =Gerente geral = Super usuario
@@ -28,38 +33,41 @@ def menu_nivel(nivel):
 
         
     if nivel == "3":
-#        dic_usuario = cp.decifrar_usuario()
-#        if dic_usuario[login][1] == "3":
-            parada = True
-            while parada == True:
-                print("PON")
+        parada = True
+        while parada == True:
+            print("PON = Estagiario")
                 
-                opcao = input("""Menu opçoes:
-    [1]-Buscar Tripulante
-    [2]-Mostrar Todos Tripulantes
-    [3]-Menu Principal
-    [4]-Sair
-    Escolha a opçao: """)
-                    
-                if opcao =="1":
-                    el.buscar_elementos(dic_elementos)
-                    
-                elif opcao == "2":
-                    el.mostrar_todos_os_elementos(dic_elementos)
-               
-                elif opcao == "3":
-                    menu_principal()
-                     
-                elif opcao == "4":
-                    menu_sair()
-                    parada = False
+            opcao = input("""Menu opçoes:
+[1]-Buscar Tripulante
+[2]-Mostrar Todos Tripulantes
+[3]-Menu Principal
+[4]-Sair
+Escolha a opçao: """)
+                
+                
+            if opcao =="1":
+                log.write(usuario+ 'fez uma pesquisa'+ dt.data()+ dt.hora())
+                log.write("\n")
+                el.buscar_elementos(dic_elementos)
+                
+            elif opcao == "2":
+                log.write(usuario+ 'visualizou todos os elementos'+ dt.data()+ dt.hora())
+                log.write("\n")
+                el.mostrar_todos_os_elementos(dic_elementos)
+           
+            elif opcao == "3":
+                menu_principal()
+                 
+            elif opcao == "4":
+                menu_sair()
+                parada = False
                 
 
 
     elif nivel == "2":
         parada = True
         while parada:
-            print("1ON")
+            print("1ON = Tecnico")
             
             opcao = input("""Menu opçoes:
     [1]-Buscar Tripulante
@@ -72,15 +80,23 @@ def menu_nivel(nivel):
 
                 
             if opcao == "1":
+                log.write(usuario+ 'fez uma pesquisa'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.buscar_elementos(dic_elementos)
                 
             elif opcao == "2":
+                log.write(usuario+ 'visualizou todos os elementos'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.mostrar_todos_os_elementos(dic_elementos)
                 
             elif opcao == "3":
+                log.write(usuario+ 'Fez uma pesquisa pelo cargo'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.buscar_cargo(dic_elementos)
                 
             elif opcao == "4":
+                log.write(usuario+ 'cadastrou um tripulante'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.cadastrar_elementos(dic_elementos)
             
             elif opcao == "5":
@@ -95,7 +111,7 @@ def menu_nivel(nivel):
     elif nivel == "1":
         parada = True
         while parada == True:
-            print("CMT")
+            print("CMT = Gerente")
             
             opcao = input("""Menu opçoes:
     [1]-Buscar Tripulante #buscar elementos
@@ -105,36 +121,57 @@ def menu_nivel(nivel):
     [5]-Remover Tripulante
     [6]-Atualizar Tripulante
     [7]-Ordenaçao Tripulante
-    [8]-Menu Principal
-    [9]-Sair
+    [8]-Impressão Ordenada
+    [9]-Menu Principal
+    [10]-Sair
     
     Escolha a opçao: """)
+                
 
             if opcao == "1":
+                log.write(usuario+ 'fez uma pesquisa'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.buscar_elementos(dic_elementos)
             
             elif opcao == "2":
+                log.write(usuario+ 'visualizou todos os elementos'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.mostrar_todos_os_elementos(dic_elementos)
                 
             elif opcao == "3":
+                log.write(usuario+ 'Fez uma pesquisa dos tripulantes pelo cargo'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.buscar_cargo(dic_elementos)                
                 
             elif opcao == "4":
+                log.write(usuario+ 'cadastrou um tripulante'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.cadastrar_elementos(dic_elementos)
                 
             elif opcao == "5":
+                log.write(usuario+ 'Fez remoçao de tripulante'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.remover_elementos(dic_elementos)
                 
             elif opcao == "6":
+                log.write(usuario+ 'Fez atualizaçao de tripulante'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.atualizar_elementos(dic_elementos)
                 
             elif opcao == "7":
+                log.write(usuario+ 'Fez ordenaçao de tripulante pelo cpf'+ dt.data()+ dt.hora())
+                log.write("\n")
                 el.ordenar_elementos(dic_elementos)
             
             elif opcao == "8":
+                log.write(usuario+ 'Fez impressao de tripulante pelo cpf'+ dt.data()+ dt.hora())
+                log.write("\n")
+                el.impressao_ordenada(dic_elementos)
+            
+            elif opcao == "9":
                 menu_principal()
                 
-            elif opcao == "9":
+            elif opcao == "10":
                 menu_sair()
                 parada = False
 
@@ -142,9 +179,10 @@ def menu_nivel(nivel):
 
     elif nivel == "0":
         parada=True
+        cp.descriptografar_elementos("elementos.txt", dic_elementos)
         while parada == True:
             
-            print("Super usuario")
+            print("GG = Super usuario")
             opcao = input("""Menu opçoes:
     [1]-Buscar Tripulante
     [2]-Mostrar Todos Tripulantes
@@ -153,44 +191,60 @@ def menu_nivel(nivel):
     [5]-Remover Tripulante
     [6]-Atualizar Tripulante
     [7]-Ordenaçao Tripulante
-    [8]-Alterar o nivel do usuario
-    [9]-Remover Usuario
-    [10]-Menu Principal
-    [11]-Sair
+    [8]-Impressão Ordenada
+    [9]-Alterar o nivel do usuario
+    [10]-Remover Usuario
+    [11]-Menu Principal
+    [12]-Sair
     Escolha a opçao: """)
 
 
             if opcao == "1":
+                log.write(usuario+ 'fez uma pesquisa'+ dt.data()+ dt.hora())
                 el.buscar_elementos(dic_elementos)
             
             elif opcao == "2":
+                log.write(usuario+ 'visualizou todos os elementos'+ dt.data()+ dt.hora())
                 el.mostrar_todos_os_elementos(dic_elementos)
                 
             elif opcao == "3":
+                log.write(usuario+ 'Fez uma pesquisa dos tripulantes pelo cargo'+ dt.data()+ dt.hora())
                 el.buscar_cargo(dic_elementos) 
                 
             elif opcao == "4":
+                log.write(usuario+ 'cadastrou um tripulante'+ dt.data()+ dt.hora())
                 el.cadastrar_elementos(dic_elementos)
                 
             elif opcao == "5":
+                log.write(usuario+ 'Fez remoçao de tripulante'+ dt.data()+ dt.hora())
                 el.remover_elementos(dic_elementos)
                 
             elif opcao == "6":
+                log.write(usuario+ 'Fez atualizaçao de tripulante'+ dt.data()+ dt.hora())
                 el.atualizar_elementos(dic_elementos)
                 
             elif opcao == "7":
+                log.write(usuario+ 'Fez ordenaçao de tripulante pelo cpf'+ dt.data()+ dt.hora())
                 el.ordenar_elementos(dic_elementos)
                 
             elif opcao == "8":
-                us.alterar_nivel_usuario(dic_usuario)
+                log.write(usuario+ 'Fez impressao de tripulante pelo cpf'+ dt.data()+ dt.hora())
+                el.impressao_ordenada(dic_elementos)
                 
             elif opcao == "9":
+                log.write(usuario+ 'Fez alteraçao do nivel de Usuario'+ dt.data()+ dt.hora())
+                us.alterar_nivel_usuario(dic_usuario)
+                
+            elif opcao == "10":
+                log.write(usuario+ 'Fez remoçao de Usuario'+ dt.data()+ dt.hora())
+                log.write("\n")
                 us.remover_usuario(dic_usuario)
             
-            elif opcao == "10":
+            elif opcao == "11":
+                    usuario = ''
                     menu_principal()
                 
-            elif opcao == "11":
+            elif opcao == "12":
                  menu_sair()
                  parada = False
                 
@@ -213,13 +267,15 @@ def login(dicionario, login, senha):
               
 def sair():
     print("Salvando dados...")#função para atualizar os dados
+    cp.criptografar_usuarios(dic_usuario, "usuarios.txt")
+    cp.criptografar_elementos(dic_elementos, "elementos.txt")
     print("Fechando Programa")
 
 
 def menu_sair():
     continua=True
     while continua==True:
-        entrada=input("Confirma saída do programa? s/n")
+        entrada=input("Confirma saída do programa? s/n ")
 
         if entrada=="s":
             sair()
@@ -228,7 +284,7 @@ def menu_sair():
             menu_principal()
         else:
 
-            print("Opção inválida! digite s/n")
+            print("Opção inválida! digite s/n ")
 
 
 def menu_principal():
@@ -238,6 +294,7 @@ def menu_principal():
 [3]=Sair
 """)
     global usuario
+  #  cp.decifrar_usuarios("Usuarios.txt", dic_usuario)
     
     while usuario == "":
         entrada=input("Digite opção: ")
@@ -246,9 +303,11 @@ def menu_principal():
             user = input("Digite o nome de usuário: ")
             password = input("Digite sua senha: ")
             acesso = login(dic_usuario, user, password)
+            print(acesso)
     
         elif entrada == "2":
-            us.cadastrar_usuario()
+#            log.write(usuario+ 'Fez alteraçao do nivel de Usuario', dt.data(), dt.hora())
+            us.cadastrar_usuario(dic_usuario)
         elif entrada=="3":
             menu_sair()
         else:
@@ -262,12 +321,6 @@ def main():
     menu_nivel(nivel)
 
 main()
+log.close()
 
-'''
-cp.criptografar_usuarios(dic_usuario, "usuarios.txt")
-cp.decifrar_usuarios("Usuarios.txt", dic_usuario)
-cp.criptografar_elementos(dic_elementos, "elementos.txt")
-cp.descriptografar_elementos("elementos.txt", dic_elementos)
-
-'''
 
