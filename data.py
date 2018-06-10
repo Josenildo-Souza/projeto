@@ -12,7 +12,7 @@ def data():
     mes = hoje.month
     ano = hoje.year
     
-    return (str(dia)+'/'+str(mes)+'/'+str(ano))
+    return (str(dia)+"/"+str(mes)+"/"+str(ano))
 
 
 def hora():
@@ -22,5 +22,5 @@ def hora():
     minutos=agora.minute
     segundos=agora.second
 
-    return(str(horas)+':'+str(minutos)+':'+str(segundos))
+    return(str(horas)+":"+str(minutos)+":"+str(segundos))
     

@@ -45,7 +45,7 @@ def remover_usuario(dic_usuario):
 
 
 
-def alterar_nivel_usuario(dic_usuario):
+def alterar_nivel_usuario():
     login = input("Digite o login que deseja modificar: ")
     continua = True
     while continua == True:

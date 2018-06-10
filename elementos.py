@@ -36,7 +36,7 @@ def buscar_elementos(dic_elementos):
             print(dic_elementos[elemento_buscado])
 #            loog = login + str(data()) + 'Busca de tripulante efetuada'
 #            log(loog)
-            escolha = input("Deseja outro Tripulante? s/n")
+            escolha = input("Deseja outro Tripulante? (s/n) ")
             if escolha == "s":
                 continua = True
             else:
@@ -50,24 +50,7 @@ def buscar_elementos(dic_elementos):
                 continua = False
 
 
-'''
-def buscar_elementos(dic_elementos):
-    continua = True
-    while continua == True:
-        elemento_buscado = input("Digite o CPF do tripulante: ")
-        
-        if elemento_buscado in dic_elementos:
-#            return dic_elementos[elemento_buscado]
-            print(dic_elementos[elemento_buscado])
-        else:
-            print("Tripulante nao encontrado em nosso banco de dados!")
-            entrada = input("Deseja buscar outro Tripulante? s/n ")
-            if entrada == "s":
-                continua = True
-            else:
-                continua = False
 
-'''
 def buscar_cargo(dic_elementos):
     continua = True
     while continua == True:
@@ -79,7 +62,7 @@ def buscar_cargo(dic_elementos):
                 resultados.append(dic_elementos[cpf])
         if len(resultados)== 0:
             print("Nenhum Tripulante com esse cargo")
-            entrada = input("Deseja buscar outro Tripulante? s/n ")
+            entrada = input("Deseja buscar outro Tripulante? (s/n) ")
             if entrada == "s":
                 continua = True
             else:
@@ -138,31 +121,23 @@ def mostrar_todos_os_elementos(dic_elementos):
 def ordenar_elementos(dic_elementos):
     lista = []
     for chave in dic_elementos:
-        lista.append((chave, dic_elementos[chave]))
+        lista.append(chave)
     lista.sort()
-#    return lista    
-    print(lista)
+    return lista
 
        
 def impressao_ordenada(dic_elementos):
-    arq = open("impressao.txt", "w")    
-    for chave in dic_elementos:
-        arq.write(chave, dic_elementos[chave])
-        arq.close()
-    print(dic_elementos)        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    arq = open("impressao.txt", "w")
+    lista = ordenar_elementos(dic_elementos)
+    for chave in lista:
+        arq.write(chave+':\n')
+        arq.write("Nome: "+ dic_elementos[chave][0]+"\n")
+        arq.write("Função: "+ dic_elementos[chave][1]+"\n")
+        arq.write("Data de Nascimento: "+ dic_elementos[chave][2]+"\n")
+        arq.write("Data de Embarque: "+ dic_elementos[chave][3]+"\n")
+        arq.write("Porto de Referencia: "+ dic_elementos[chave][4]+"\n")
+        arq.write("Passaporte: "+ dic_elementos[chave][5]+"\n")
+        arq.write("Matricula: "+ dic_elementos[chave][6]+"\n\n")
+    arq.close()
+  
         
